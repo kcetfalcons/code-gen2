@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="border-t">
       <div className="container py-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
         <p>
-          © {new Date().getFullYear()} FalconBuilder. Build better without
+          © {new Date().getFullYear()} Code Generator. Build better without
           code.
         </p>
         <div className="flex items-center gap-4">
