@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Header() {
   return (
@@ -32,9 +33,10 @@ export default function Header() {
           </a>
         </nav>
         <div className="flex items-center gap-2">
-          <a href="#builder">
+          <a href="#builder" className="hidden sm:block">
             <Button size="sm">Get Started</Button>
           </a>
+          <ThemeToggle />
         </div>
       </div>
     </header>
