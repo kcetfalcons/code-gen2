@@ -7,7 +7,7 @@ interface Orb { x: number; y: number; r: number; vx: number; vy: number; hue: nu
 export default function RelaxGame(){
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [running, setRunning] = useState(true);
-  const [orbs, setOrbs] = useState<Orb[]>(() => genOrbs());
+  const orbsRef = useRef<Orb[]>(genOrbs());
 
   useEffect(()=>{
     let raf = 0;
@@ -20,16 +20,13 @@ export default function RelaxGame(){
       if(canvas.width !== w || canvas.height !== h){ canvas.width = w; canvas.height = h; }
       ctx.clearRect(0,0,canvas.width, canvas.height);
 
-      setOrbs(prev => prev.map(o => {
+      const orbs = orbsRef.current;
+      for(const o of orbs){
         if(running){
           o.x += o.vx; o.y += o.vy;
           if(o.x - o.r < 0 || o.x + o.r > canvas.width) o.vx *= -1;
           if(o.y - o.r < 0 || o.y + o.r > canvas.height) o.vy *= -1;
         }
-        return o;
-      }));
-
-      for(const o of orbs){
         const grad = ctx.createRadialGradient(o.x, o.y, o.r*0.2, o.x, o.y, o.r);
         grad.addColorStop(0, `hsla(${o.hue}, 80%, 65%, .9)`);
         grad.addColorStop(1, `hsla(${o.hue}, 80%, 25%, 0)`);
@@ -44,15 +41,15 @@ export default function RelaxGame(){
 
     raf = requestAnimationFrame(render);
     return () => cancelAnimationFrame(raf);
-  }, [running, orbs]);
+  }, [running]);
 
   const onClick = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left; const y = e.clientY - rect.top;
-    setOrbs(prev => prev.map(o => ({...o, vx: o.vx + (o.x < x ? -0.2:0.2), vy: o.vy + (o.y < y ? -0.2:0.2)})));
+    orbsRef.current = orbsRef.current.map(o => ({...o, vx: o.vx + (o.x < x ? -0.2:0.2), vy: o.vy + (o.y < y ? -0.2:0.2)}));
   };
 
-  const reset = () => setOrbs(genOrbs());
+  const reset = () => { orbsRef.current = genOrbs(); };
 
   return (
     <section id="game" className="container py-12">
