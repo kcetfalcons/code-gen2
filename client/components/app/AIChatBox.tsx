@@ -55,8 +55,8 @@ export default function AIChatBox() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <ScrollArea className="h-80 rounded-md border p-4 bg-background">
-            <div className="space-y-4">
+          <ScrollArea className="h-[50vh] sm:h-80 md:h-[60vh] rounded-md border p-3 sm:p-4 bg-background">
+            <div className="space-y-3 sm:space-y-4">
               {messages.length === 0 && (
                 <div className="text-sm text-muted-foreground">
                   Try: “Create a hero section with a headline, subtext and a
@@ -66,10 +66,10 @@ export default function AIChatBox() {
               {messages.map((m, i) => (
                 <div
                   key={i}
-                  className={`max-w-[85%] ${m.role === "user" ? "ml-auto text-right" : ""}`}
+                  className={`max-w-[90%] sm:max-w-[85%] ${m.role === "user" ? "ml-auto text-right" : ""}`}
                 >
                   <div
-                    className={`inline-block rounded-2xl px-3 py-2 text-sm ${m.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"}`}
+                    className={`inline-block rounded-2xl px-3 py-2 text-sm break-words ${m.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"}`}
                   >
                     {m.content}
                   </div>
@@ -79,8 +79,9 @@ export default function AIChatBox() {
             </div>
           </ScrollArea>
         </CardContent>
-        <CardFooter className="gap-2">
+        <CardFooter className="gap-2 flex-col sm:flex-row items-stretch sm:items-center">
           <Input
+            className="flex-1 min-w-0"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask anything..."
@@ -91,7 +92,7 @@ export default function AIChatBox() {
               }
             }}
           />
-          <Button onClick={send}>Send</Button>
+          <Button className="w-full sm:w-auto" onClick={send} aria-label="Send message">Send</Button>
         </CardFooter>
       </Card>
     </section>
