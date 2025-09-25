@@ -12,9 +12,24 @@ export default function Header() {
           </span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm">
-          <a href="#builder" className="text-muted-foreground hover:text-foreground transition-colors">Builder</a>
-          <a href="#game" className="text-muted-foreground hover:text-foreground transition-colors">Relax Game</a>
-          <a href="#chat" className="text-muted-foreground hover:text-foreground transition-colors">AI Chat</a>
+          <a
+            href="#builder"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Builder
+          </a>
+          <a
+            href="#game"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Relax Game
+          </a>
+          <a
+            href="#chat"
+            className="text-muted-foreground hover:text-foreground transition-colors"
+          >
+            AI Chat
+          </a>
         </nav>
         <div className="flex items-center gap-2">
           <a href="#builder">

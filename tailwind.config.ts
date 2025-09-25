@@ -73,8 +73,14 @@ export default {
           to: { height: "0" },
         },
         glow: {
-          "0%, 100%": { filter: "saturate(110%) drop-shadow(0 0 0.35rem hsl(var(--primary)/.45))" },
-          "50%": { filter: "saturate(120%) drop-shadow(0 0 0.65rem hsl(var(--primary)/.6))" },
+          "0%, 100%": {
+            filter:
+              "saturate(110%) drop-shadow(0 0 0.35rem hsl(var(--primary)/.45))",
+          },
+          "50%": {
+            filter:
+              "saturate(120%) drop-shadow(0 0 0.65rem hsl(var(--primary)/.6))",
+          },
         },
         float: {
           "0%": { transform: "translateY(0px)" },
