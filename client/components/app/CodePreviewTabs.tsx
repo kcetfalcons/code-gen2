@@ -1,5 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export default function CodePreviewTabs({
   html,
@@ -11,10 +12,36 @@ export default function CodePreviewTabs({
   react: string;
 }) {
   const copy = async (text: string) => {
+    // Try async Clipboard API first (secure contexts)
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(text);
+        toast.success("Copied to clipboard");
+        return;
+      } catch (e) {
+        console.warn("Clipboard API blocked, falling back", e);
+      }
+    }
+    // Fallback: execCommand copy via temporary textarea
     try {
-      await navigator.clipboard.writeText(text);
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.top = "-1000px";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand("copy");
+      document.body.removeChild(ta);
+      if (ok) {
+        toast.success("Copied to clipboard");
+        return;
+      }
+      throw new Error("execCommand copy returned false");
     } catch (e) {
       console.error("Copy failed", e);
+      toast.error("Copy blocked. Select text and press Ctrl/Cmd+C.");
     }
   };
   return (
