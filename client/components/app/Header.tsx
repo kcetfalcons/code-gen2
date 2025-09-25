@@ -9,7 +9,7 @@ export default function Header() {
         <Link to="/" className="flex items-center gap-2">
           <div className="h-8 w-8 rounded-md bg-gradient-to-br from-primary to-accent animate-glow" />
           <span className="text-lg font-bold tracking-tight bg-gradient-to-r from-primary to-foreground bg-clip-text text-transparent">
-            FalconBuilder
+            Code Generator
           </span>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm">
