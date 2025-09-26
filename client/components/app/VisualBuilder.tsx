@@ -309,6 +309,8 @@ export default function VisualBuilder() {
           <CodePreviewTabs html={html} css={css} react={reactCode} />
         </CardContent>
       </Card>
+
+      <PromptCodeGen baseHtml={html} baseCss={css} baseReact={reactCode} />
     </section>
   );
 
