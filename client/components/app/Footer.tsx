@@ -10,9 +10,6 @@ export default function Footer() {
           <a href="#builder" className="hover:text-foreground">
             Builder
           </a>
-          <a href="#game" className="hover:text-foreground">
-            Relax Game
-          </a>
           <a href="#chat" className="hover:text-foreground">
             AI Chat
           </a>
