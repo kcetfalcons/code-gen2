@@ -32,17 +32,32 @@ export default function AIChatBox() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const send = () => {
-    if (!input.trim()) return;
+  const [loading, setLoading] = useState(false);
+
+  const send = async () => {
+    if (!input.trim() || loading) return;
     const user: Message = { role: "user", content: input.trim() };
     setMessages((m) => [...m, user]);
     setInput("");
-
-    const reply = generateReply([...messages, user]);
-    setTimeout(
-      () => setMessages((m) => [...m, { role: "assistant", content: reply }]),
-      300,
-    );
+    setLoading(true);
+    try {
+      const r = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: [...messages, user] }),
+      });
+      if (r.ok) {
+        const data = await r.json();
+        const content = (data && (data.message || data.content)) || generateReply([...messages, user]);
+        setMessages((m) => [...m, { role: "assistant", content }]);
+      } else {
+        setMessages((m) => [...m, { role: "assistant", content: generateReply([...messages, user]) }]);
+      }
+    } catch {
+      setMessages((m) => [...m, { role: "assistant", content: generateReply([...messages, user]) }]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
