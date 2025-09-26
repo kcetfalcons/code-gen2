@@ -20,12 +20,6 @@ export default function Header() {
             Builder
           </a>
           <a
-            href="#game"
-            className="text-muted-foreground hover:text-foreground transition-colors"
-          >
-            Relax Game
-          </a>
-          <a
             href="#chat"
             className="text-muted-foreground hover:text-foreground transition-colors"
           >
