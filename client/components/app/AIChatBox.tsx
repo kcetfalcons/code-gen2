@@ -107,7 +107,7 @@ export default function AIChatBox() {
               }
             }}
           />
-          <Button className="w-full sm:w-auto" onClick={send} aria-label="Send message">Send</Button>
+          <Button className="w-full sm:w-auto" onClick={send} aria-label="Send message" disabled={loading}>{loading?"Sending...":"Send"}</Button>
         </CardFooter>
       </Card>
     </section>
