@@ -1,5 +1,4 @@
 import VisualBuilder from "@/components/app/VisualBuilder";
-import RelaxGame from "@/components/app/RelaxGame";
 import AIChatBox from "@/components/app/AIChatBox";
 
 export default function Index() {
@@ -28,15 +27,9 @@ export default function Index() {
                 >
                   Start Building
                 </a>
-                <a
-                  href="#game"
-                  className="inline-flex items-center rounded-md border px-4 py-2"
-                >
-                  Take a break
-                </a>
               </div>
               <div className="mt-6 text-sm text-muted-foreground">
-                Made for non‑coders. Powered by modern web tech.
+                Made for non‑coders. Designed by KCET Falcons.
               </div>
             </div>
             <div className="relative">
@@ -58,7 +51,6 @@ export default function Index() {
       </section>
 
       <VisualBuilder />
-      <RelaxGame />
       <AIChatBox />
     </div>
   );
