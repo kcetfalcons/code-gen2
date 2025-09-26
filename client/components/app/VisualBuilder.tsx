@@ -10,6 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import CodePreviewTabs from "./CodePreviewTabs";
+import PromptCodeGen from "./PromptCodeGen";
 
 type Block =
   | { id: string; type: "heading"; text: string; level: 1 | 2 | 3 }
