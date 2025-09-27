@@ -48,13 +48,21 @@ export default function AIChatBox() {
       });
       if (r.ok) {
         const data = await r.json();
-        const content = (data && (data.message || data.content)) || generateReply([...messages, user]);
+        const content =
+          (data && (data.message || data.content)) ||
+          generateReply([...messages, user]);
         setMessages((m) => [...m, { role: "assistant", content }]);
       } else {
-        setMessages((m) => [...m, { role: "assistant", content: generateReply([...messages, user]) }]);
+        setMessages((m) => [
+          ...m,
+          { role: "assistant", content: generateReply([...messages, user]) },
+        ]);
       }
     } catch {
-      setMessages((m) => [...m, { role: "assistant", content: generateReply([...messages, user]) }]);
+      setMessages((m) => [
+        ...m,
+        { role: "assistant", content: generateReply([...messages, user]) },
+      ]);
     } finally {
       setLoading(false);
     }
@@ -107,7 +115,14 @@ export default function AIChatBox() {
               }
             }}
           />
-          <Button className="w-full sm:w-auto" onClick={send} aria-label="Send message" disabled={loading}>{loading?"Sending...":"Send"}</Button>
+          <Button
+            className="w-full sm:w-auto"
+            onClick={send}
+            aria-label="Send message"
+            disabled={loading}
+          >
+            {loading ? "Sending..." : "Send"}
+          </Button>
         </CardFooter>
       </Card>
     </section>
